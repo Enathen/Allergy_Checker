@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/scan"
+            android:icon="@drawable/scan"
+            android:title="@string/scan"/>
+
+    <item
+            android:id="@+id/allergies"
+            android:icon="@drawable/allergy"
+            android:title="@string/allergies"/>
+
+    <item
+            android:id="@+id/settings"
+            android:icon="@drawable/settings"
+            android:title="@string/settings"/>
+</menu>
