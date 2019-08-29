@@ -2783,6 +2783,7 @@
     <string name="crengrInsta" translatable="false">instagram.com/creativeendlessgrowing/</string>
     <string name="allergyInsta" translatable="false">instagram.com/Allergychecker/</string>
     <string name="title_activity_bottom_navigation_name" translatable="false">BottomNavigationName</string>
+    <string name="searchAllergies">SearchAllergies</string>
 
 
 </resources>

@@ -2,13 +2,21 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:background="@drawable/rounded"
     android:elevation="4dp"
-    android:foreground="?selectableItemBackground"
+    android:paddingStart="25dp"
+    android:foreground="?attr/selectableItemBackground"
     android:orientation="horizontal"
+
     android:padding="8dp">
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        style="@style/cb" />
 
     <TextView
         android:id="@+id/name"
@@ -17,16 +25,7 @@
         android:layout_weight="1"
         android:autoLink="web"
         android:text="@string/pea"
-        style="@style/txt.blue"
-        />
+        style="@style/txt" />
 
-    <TextView
-        android:id="@+id/amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="1"
-        android:textAlignment="textEnd"
-        style="@style/txt.blue" />
 
 </LinearLayout>
