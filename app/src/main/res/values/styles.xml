@@ -4,7 +4,7 @@
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/primary</item>
     <item name="colorPrimaryDark">@color/primaryDark</item>
-    <item name="colorAccent">@color/white</item>
+    <item name="colorAccent">@color/primaryLight</item>
 </style>
 
     <style name="txt">
@@ -29,6 +29,8 @@
         <item name="android:buttonTint">@color/primaryDark</item>
     </style>
     <style name="searchView" parent="Widget.AppCompat.SearchView" >
+        <item name="android:queryBackground">@color/white</item>
+
         <!-- Query Text Color -->
         <item name="android:textColorPrimary">@color/white</item>
         <!-- Hint Color -->

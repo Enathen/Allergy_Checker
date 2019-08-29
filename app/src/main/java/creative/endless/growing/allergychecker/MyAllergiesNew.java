@@ -19,6 +19,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -33,6 +35,8 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
     ArrayList<View> parentViews = new ArrayList<>();
     private LinearLayout parentFrame;
     private ViewGroup container;
+    private final long DELAY = 500; // milliseconds
+    private Timer timer = new Timer();
 
 
     public MyAllergiesNew() {
@@ -108,21 +112,38 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
     }
 
     @Override
-    public boolean onQueryTextChange(String s) {
-        int filter;
-        if (s.equals("")) {
-            filter = adapter.filter("ABCDEFGHJI");
-            for (View parentView : parentViews) {
-                parentView.setVisibility(View.VISIBLE);
-            }
+    public boolean onQueryTextChange(final String s) {
 
-        } else {
-            filter = adapter.filter(s);
-            for (View parentView : parentViews) {
-                parentView.setVisibility(View.GONE);
-            }
-        }
-        setListViewHeightBasedOnChildren(listView, filter, listView.getSelectedView());
+        timer.cancel();
+        timer = new Timer();
+        timer.schedule(
+                new TimerTask() {
+                    @Override
+                    public void run() {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                int filter;
+                                if (s.equals("")) {
+                                    filter = adapter.filter("ABCDEFGHJI");
+                                    for (View parentView : parentViews) {
+                                        parentView.setVisibility(View.VISIBLE);
+                                    }
+
+                                } else {
+                                    filter = adapter.filter(s);
+                                    for (View parentView : parentViews) {
+                                        parentView.setVisibility(View.GONE);
+                                    }
+                                }
+                                setListViewHeightBasedOnChildren(listView, filter, listView.getSelectedView());
+                            }
+                        });
+
+                    }
+                },
+                DELAY
+        );
         return true;
     }
 
@@ -179,7 +200,7 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
                             final LinearLayout inflate = (LinearLayout) getLayoutInflater().inflate(R.layout.allergy_parent_list_item, container, false);
                             final LinearLayout parent = inflate.findViewById(R.id.linLayAllergies);
                             parentViews.add(inflate);
-                            ((TextView) parent.findViewById(R.id.name)).setText(getString(integer));
+                            ((TextView) parent.findViewById(R.id.name)).setText(convertToCorrectAllergyString(integer));
                             final ImageView chevron = parent.findViewById(R.id.chevron);
                             parentCB = parent.findViewById(R.id.checkBox);
                             parentCB.setChecked(PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean(getString(integer), false));
@@ -203,6 +224,10 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
                                     checkbox.setChecked(b);
                                 }
                                 if(childCheckbox.isEmpty()){
+                                    for (final Integer allergy : myAllergyPreference.get(integer)) {
+                                        PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean(getString(allergy), b).apply();
+
+                                    }
 
                                 }
                                 PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean(getString(integer), b).apply();
@@ -228,7 +253,7 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
 
                                     for (final Integer allergy : myAllergyPreference.get(integer)) {
                                         final View child = getLayoutInflater().inflate(R.layout.allergy_child_list_item, container, false);
-                                        ((TextView) child.findViewById(R.id.name)).setText(getString(allergy));
+                                        ((TextView) child.findViewById(R.id.name)).setText(convertToCorrectAllergyString(allergy));
                                         inflate.addView(child);
                                         views.add(child);
                                         final CheckBox cb = child.findViewById(R.id.checkBox);
@@ -279,6 +304,10 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
             }
             return null;
         }
+    }
+
+    private String convertToCorrectAllergyString(Integer integer) {
+        return getString(integer).split(",")[0];
     }
 }
 

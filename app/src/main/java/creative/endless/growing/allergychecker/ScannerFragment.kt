@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.vision.CameraSource
@@ -22,9 +21,11 @@ import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_scanner.*
-import java.util.*
+import java.util.ArrayList
+import java.util.HashMap
 
 class ScannerFragment : Fragment() {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_scanner, container, false)
 
@@ -54,18 +55,7 @@ class ScannerFragment : Fragment() {
 
             @SuppressLint("MissingPermission")
             override fun surfaceCreated(p0: SurfaceHolder?) {
-
-                if (isCameraPermissionGranted()) {
-                    mCameraSource.start(preview.holder)
-                } else {
-
-                    ActivityCompat.requestPermissions(
-                            activity!!.parent,
-                            arrayOf(Manifest.permission.CAMERA),
-                            1
-                    )
-                }
-
+                mCameraSource.start(preview.holder)
             }
         })
         if (!textRecognizer.isOperational()) {

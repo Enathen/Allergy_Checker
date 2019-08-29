@@ -139,9 +139,6 @@ public class AllergyList {
         for (ArrayList<Integer> pictureIngredients : treeMap.values()) {
             sort(pictureIngredients);
         }
-        for (Integer integer : treeMap.keySet()) {
-            Log.d(TAG, "getMyAllergies: " + integer + " : " + context.getString(integer));
-        }
         return treeMap;
     }
 
