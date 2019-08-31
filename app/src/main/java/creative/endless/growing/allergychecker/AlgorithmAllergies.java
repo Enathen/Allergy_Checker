@@ -5,11 +5,18 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
 import androidx.annotation.NonNull;
 import creative.endless.growing.allergychecker.bktree.BkTreeSearcher;
 import creative.endless.growing.allergychecker.bktree.MutableBkTree;
-
-import java.util.*;
 
 /**
  * allergy calculate class
@@ -94,21 +101,6 @@ public class AlgorithmAllergies {
         return hashSetToCheckLast;
     }
 
-    public int translateAllAllergies(int id, HashMap<String, AllergiesClass> allergies, ArrayList<Locale> listOfLanguages, Context context) {
-        int length = 0;
-        for (Locale locale : listOfLanguages) {
-            String localeString = getStringByLocal(context, id, locale.getLanguage());
-            List<String> list = TextHandler.split(localeString);
-            for (int i = 0; i < list.size(); i++) {
-                allergies.put(list.get(i), new AllergiesClass(locale.getLanguage(),
-                        list.get(i), id, context.getString(id)));
-                if (length < list.get(i).length()) {
-                    length = list.get(i).length() + 2;
-                }
-            }
-        }
-        return length;
-    }
 
     /**
      * handles the algorithm of nearby allergies.
@@ -122,9 +114,8 @@ public class AlgorithmAllergies {
      * scanned text ej se which would make the user annoyed.
      *  @param hashSetAllStrings all strings scanned
      * @param allergies         all allergies user have
-     * @param allFoundAllergies
      */
-    public void bkTree(TreeMap<Integer, TreeSet<String>> hashSetAllStrings, HashSet<String> allergies, HashMap<String, Integer> allFoundAllergies) {
+    public void bkTree(TreeMap<Integer, TreeSet<String>> hashSetAllStrings, HashMap<String, AllergiesClass> allergies) {
         MutableBkTree<String> bkTree = new MutableBkTree<>(HammingDistance.hammingDistance);
         for (Integer stringTreeSet : hashSetAllStrings.keySet()) {
             if (stringTreeSet <= 0) {
@@ -133,7 +124,7 @@ public class AlgorithmAllergies {
             bkTree.addAll(hashSetAllStrings.get(stringTreeSet));
         }
         BkTreeSearcher<String> searcher = new BkTreeSearcher<>(bkTree);
-        for (String allergy : allergies) {
+        for (String allergy : allergies.keySet()) {
             Set<BkTreeSearcher.Match<? extends String>> matches;
             if (allergy.length() < 5) {
                 continue;
@@ -148,16 +139,7 @@ public class AlgorithmAllergies {
                 matches = searcher.search(allergy, 4);
             }
             for (BkTreeSearcher.Match<? extends String> match : matches) {
-                if (allFoundAllergies.containsKey(allergy)) {
-
-                    Integer integer = allFoundAllergies.get(allergy);
-                    integer = integer + 1;
-                    allFoundAllergies.put(allergy, integer);
-                } else {
-                    allFoundAllergies.put(allergy, 1);
-                }
-
-
+                allergies.get(allergy).amount++;
             }
         }
     }
@@ -166,20 +148,14 @@ public class AlgorithmAllergies {
      * check full string if substring is contained if allergy already found break.
      * @param s                 to check
      * @param allergies         user have
-     * @param allFoundAllergies that already found
      */
-    public void checkFullString(String s, HashSet<String> allergies, HashMap<String, Integer> allFoundAllergies) {
+    public void checkFullString(String s, HashMap<String, AllergiesClass> allergies) {
 
-        for (String string : allergies) {
+        for (String string : allergies.keySet()) {
             if (s.contains(string)) {
-                if (allFoundAllergies.containsKey(string)) {
 
-                    Integer integer = allFoundAllergies.get(string);
-                    integer = integer + 1;
-                    allFoundAllergies.put(string, integer);
-                } else {
-                    allFoundAllergies.put(string, 1);
-                }
+                allergies.get(string).amount++;
+
 
             }
         }

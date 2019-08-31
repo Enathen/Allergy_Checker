@@ -7,7 +7,7 @@
     android:background="@drawable/rounded_primary_dark"
     android:elevation="4dp"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="@dimen/listItemPadding">
 
     <TextView
         android:id="@+id/name"

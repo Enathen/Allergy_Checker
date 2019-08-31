@@ -11,8 +11,8 @@
             android:icon="@drawable/allergy"
             android:title="@string/allergies"/>
 
-    <item
+  <!--  <item
             android:id="@+id/settings"
             android:icon="@drawable/settings"
-            android:title="@string/settings"/>
+            android:title="@string/settings"/>-->
 </menu>

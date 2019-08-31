@@ -11,12 +11,13 @@
         android:id="@+id/linLayAllergies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginVertical="4dp"
+        android:layout_marginHorizontal="8dp"
         android:background="@drawable/ripple_primary_dark"
         android:elevation="4dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:padding="8dp"
+        android:padding="@dimen/listItemPadding"
         >
 
         <CheckBox
@@ -30,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginStart="2dp"
             android:autoLink="web"
             android:text="@string/pea"
             style="@style/txt.blue" />

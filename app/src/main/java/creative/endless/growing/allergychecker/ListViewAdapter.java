@@ -23,12 +23,14 @@ public class ListViewAdapter extends BaseAdapter {
     LayoutInflater inflater;
     private List<Integer> Allergies = null;
     private HashMap<Integer, Integer> integerIntegerHashMap;
+    private HashMap<Integer, CheckBox> checkboxesHashmap;
     private ArrayList<Integer> arraylist;
 
-    public ListViewAdapter(Context context, ArrayList<Integer> allergies, HashMap<Integer, Integer> integerIntegerHashMap) {
+    public ListViewAdapter(Context context, ArrayList<Integer> allergies, HashMap<Integer, Integer> integerIntegerHashMap, HashMap<Integer, CheckBox> checkboxesHashmap) {
         mContext = context;
         this.Allergies = allergies;
         this.integerIntegerHashMap = integerIntegerHashMap;
+        this.checkboxesHashmap = checkboxesHashmap;
         inflater = LayoutInflater.from(mContext);
         this.arraylist = new ArrayList<Integer>();
         this.arraylist.addAll(allergies);
@@ -63,12 +65,14 @@ public class ListViewAdapter extends BaseAdapter {
                 holder.checkBox.setChecked(!holder.checkBox.isChecked());
             }
         });
+
         holder.name.setText(TextHandler.capitalLetter(TextHandler.cutFirstWord(mContext.getString(Allergies.get(position)))));
         holder.checkBox.setChecked(PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean(correctKey, false));
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 PreferenceManager.getDefaultSharedPreferences(mContext).edit().putBoolean(correctKey, b).apply();
+                checkboxesHashmap.get(integerIntegerHashMap.get(Allergies.get(position))).setChecked(b);
             }
         });
         view.setTag(holder);

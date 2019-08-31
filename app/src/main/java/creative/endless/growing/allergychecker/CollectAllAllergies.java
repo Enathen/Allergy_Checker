@@ -1,16 +1,14 @@
 package creative.endless.growing.allergychecker;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
-import java.sql.SQLTransactionRollbackException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.TreeMap;
+import java.util.Locale;
 
-import static android.content.ContentValues.TAG;
+import androidx.annotation.NonNull;
 
 /**
  * @author Jonathan Alexander Norberg
@@ -18,15 +16,24 @@ import static android.content.ContentValues.TAG;
  */
 
 public class CollectAllAllergies {
-    public static HashSet<String> getAllergies(Context context){
-        HashSet<String> integers = new HashSet<>();
+    public static HashMap<String, AllergiesClass> getAllergies(Context context, Locale locale) {
+        HashMap<String, AllergiesClass> integers = new HashMap<>();
         HashMap<Integer, Integer> hashMap = ValidateAllergiesPreferences.setupAllergy();
         for (int key : hashMap.keySet()) {
-            if(PreferenceManager.getDefaultSharedPreferences(context).getBoolean(String.valueOf(hashMap.get(key)),true)){
-                integers.add(context.getString(key));
+            if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean(String.valueOf(hashMap.get(key)), false)) {
+                integers.put(getLocalizedResources(context, locale).getString(key), new AllergiesClass(context.getString(key)));
             }
         }
-        Log.d(TAG, "getAllergies: "+ integers);
+
         return integers;
+    }
+
+    @NonNull
+    static Resources getLocalizedResources(Context context, Locale desiredLocale) {
+        Configuration conf = context.getResources().getConfiguration();
+        conf = new Configuration(conf);
+        conf.setLocale(desiredLocale);
+        Context localizedContext = context.createConfigurationContext(conf);
+        return localizedContext.getResources();
     }
 }

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="nuts">Nötter, Nöt</string>
+    <string name="almond">Mandel, mandlar</string>
+    <string name="brazil">Paranötter, Paranöt</string>
+    <string name="cocoa">Kakao, Kakaoböna</string>
+    <string name="hazelnut">Hasselnötter, Hasselnöt</string>
+
+    <string name="macadamia">Macadamianötter, Macadamianöt, Macadamia</string>
+    <string name="pecans">Pecan, Pecanöt</string>
+    <string name="pili">Pilinötter, Pilinöt</string>
+    <string name="pine">Pinjenötter, Pinjenöt</string>
+    <string name="pistachios">Pistaschnötter, Pistaschnöt, Pistasch</string>
+    <string name="soy">Soja</string>
+    <string name="tiger">Tigernötter, Tigernöt</string>
+    <string name="walnuts">Valnötter, Valnöt</string>
+    <string name="sesame">Sesam, Sesamfrön</string>
+
+    <string name="tuna">Tonfisk</string>
+    <string name="salmon">Lax</string>
+    <string name="caviar">Kaviar</string>
+    <string name="anchovies">Ansjovis</string>
+    <string name="bass">Havsabborre</string>
+    <string name="catfish">Havskatt</string>
+    <string name="cod">Torsk</string>
+    <string name="flounder">Flundra</string>
+    <string name="haddock">Haddock</string>
+    <string name="hake">Kummel</string>
+    <string name="halibut">Hälleflundra</string>
+    <string name="herring">Sill</string>
+    <string name="mahi">Mahi</string>
+    <string name="perch">Abbore</string>
+    <string name="pollock">Sej</string>
+    <string name="pike">Gädda</string>
+    <string name="swordfish">Svärdfisk</string>
+    <string name="sole">Sjötunga</string>
+    <string name="snapper">Blåfisk</string>
+    <string name="surimi">Surimi</string>
+    <string name="tilapia">Tilapia</string>
+    <string name="trout">Forell</string>
+
+
+    <string name="barnacle">Rankfotingar</string>
+    <string name="crab">Krabba, Krabbor</string>
+    <string name="crawfish">Kräfta, Kräftor</string>
+    <string name="krill">Lysräka</string>
+    <string name="lobster">Hummer</string>
+    <string name="shrimp">Räka</string>
+    <string name="scampi">Sjökräfta</string>
+    <string name="abalone">Havsöra</string>
+    <string name="clams">Mussla</string>
+    <string name="cockle">Hjärtmussla</string>
+    <string name="limpet">Skålsnäcka</string>
+    <string name="mussels">Mussla, Musslor</string>
+    <string name="octopus">Bläckfisk</string>
+    <string name="oysters">Ostron</string>
+    <string name="periwinkle">Snäcka</string>
+    <string name="urchin">Sjöborre</string>
+    <string name="scallops">Kammussla</string>
+    <string name="snails">Snigel, Sniglar</string>
+    <string name="whelk">Valthornssnäcka</string>
+
+    <string name="wheat">Vete</string>
+    <string name="durum">Durum</string>
+    <string name="emmer">Emmer</string>
+    <string name="rye">Råg</string>
+    <string name="barley">Korn</string>
+    <string name="triticale">Rågvete</string>
+    <string name="malt">Malt</string>
+    <string name="semolina">Semolina</string>
+    <string name="spelt">Spelt</string>
+    <string name="farina">Mjöl</string>
+    <string name="farro">Farro</string>
+    <string name="graham">Graham</string>
+    <string name="kamut">Kamut</string>
+    <string name="einkorn">Einkorn</string>
+
+
+    <string name="apple">Äpple</string>
+    <string name="pear">Päron</string>
+    <string name="tomato">Tomat, Tomater</string>
+    <string name="strawberry">Jordgubbar, Jordgubbe</string>
+    <string name="prune">Katrinplommon</string>
+    <string name="pomegranate">Granatäpple</string>
+    <string name="pinapple">Ananas</string>
+    <string name="persimmon">Persimon</string>
+    <string name="peach">Persika</string>
+    <string name="orange">Apelsin, Apelsiner</string>
+    <string name="melon">Melon</string>
+    <string name="mango">Mango</string>
+    <string name="lychee">Litchi</string>
+    <string name="kiwi">Kiwi</string>
+    <string name="grape">Vindruva</string>
+    <string name="date">Dadel</string>
+    <string name="fig">Fikon</string>
+    <string name="coconut">Kokosnöt</string>
+    <string name="cherry">Körsbär</string>
+    <string name="banana">Banan</string>
+    <string name="apricot">Aprikos</string>
+    <string name="acerola">Acerola</string>
+    <string name="avocado">Avokado</string>
+
+    <string name="shellfish">Skaldjur</string>
+    <string name="gluten">Gluten</string>
+    <string name="fish">Fisk</string>
+    <string name="milk">Mjölk</string>
+    <string name="seeds">Frön</string>
+
+
+    <string name="buckwheat">Bovete</string>
+    <string name="mustardSeed">Senapsfrö</string>
+    <string name="poppySeed">Vallmofrö</string>
+    <string name="sunflowerSeed">Solrosfrö</string>
+    <string name="fruit">Frukt</string>
+    <string name="vegetables">Grönsaker</string>
+    <string name="vegetarian">Vegetarian</string>
+    <string name="vegan">Vegan</string>
+    <string name="citrus">Citrus</string>
+
+    <string name="legumes">Baljväxt</string>
+    <string name="aspargus">Sparris</string>
+    <string name="bellPepper">Paprika</string>
+    <string name="cabbage">Kål</string>
+    <string name="carrot">Morot</string>
+    <string name="celery">Selleri</string>
+    <string name="garlic">Vitlök</string>
+    <string name="lettuce">Sallad</string>
+    <string name="maize">Majs</string>
+    <string name="potato">Potatis</string>
+    <string name="pumpkin">Pumpa</string>
+    <string name="zucchini">Zucchini</string>
+    <string name="pig">Gris</string>
+    <string name="duck">Anka</string>
+    <string name="goat">Get</string>
+    <string name="poultry">Höns</string>
+    <string name="lamb">Lamm</string>
+    <string name="sausage">Korv</string>
+    <string name="gelatin">Gelatin</string>
+    <string name="dairy">Mejeri</string>
+    <string name="egg">Ägg</string>
+    <string name="honey">Honung</string>
+    <string name="lactoVegetarian">Lacto-Vegetarian</string>
+    <string name="lactoOvoVegetarian">Lacto-ovo-vegetarian</string>
+    <string name="demiVegetarian">Demivegetarian</string>
+    <string name="polloVegetarian">Pollovegetarian</string>
+    <string name="chicken">Kyckling</string>
+    <string name="anis">Anis</string>
+    <string name="coriander">Koriander</string>
+    <string name="cumin">Kummin</string>
+    <string name="fennel">Fänkål</string>
+    <string name="parsley">Persilja</string>
+    <string name="ragweed">Ragweed</string>
+    <string name="echinacea">Echinacea</string>
+    <string name="artichoke">Kronärtskocka</string>
+    <string name="dandelions">Maskrosor</string>
+    <string name="hibiscus">Hibiskus</string>
+    <string name="chickpea">Kikärtor, Kikärta, Kikärt</string>
+    <string name="lentil">Linser, Lins</string>
+    <string name="lupin">Lupin</string>
+    <string name="peanut">Jordnötter, Jordnöt</string>
+    <string name="pea">Ärta, Ärtor,Ärt</string>
+    <string name="soybean">Sojaböna, Sojabönor</string>
+    <string name="lemon">Citron</string>
+    <string name="lime">Lime</string>
+    <string name="grapefruit">Grapefrukt</string>
+
+    <string name="nightshade">Potatisväxt</string>
+    <string name="aubergine">Aubergine, Äggplanta, Äggört</string>
+    <string name="solanum">Solanum</string>
+    <string name="physalis">Physalis, Kapkrusbär</string>
+    <string name="pepino">Pepino</string>
+    <string name="naranjilla">Naranjilla</string>
+    <string name="chineseLantern">Judekörs</string>
+    <string name="tamarillo">Tamarillo</string>
+
+    <string name="peppers">paprikor</string>
+    <string name="cayenne">kajenn</string>
+    <string name="jalapeño">Jalapeño</string>
+    <string name="birdsEyeChili">bird\'s Eye Chili</string>
+    <string name="capsicum">Spansk peppar</string>
+    <string name="madameJeanette">Madame Jeanette</string>
+    <string name="newMexicochile">New Mexico chile</string>
+
+
+    <string name="bacon">Bacon</string>
+    <string name="choletsorol">Kolesterol</string>
+    <string name="glycerol">Glycerol</string>
+    <string name="lard">Ister</string>
+    <string name="magnesiumStearate">Magnesiumstearat</string>
+    <string name="monoGlycerides">Monoglycerider</string>
+    <string name="pepsin">Pepsin</string>
+
+    <string name="halal">Halal</string>
+    <string name="spice">Kryddor</string>
+    <string name="butter">Smör</string>
+    <string name="casein">Kasein</string>
+    <string name="yoghurt">Yogurt, Yoghurt, Yoghourt</string>
+    <string name="custard">Vaniljsås</string>
+    <string name="cream">Grädde</string>
+    <string name="lactose">Laktos</string>
+
+    <string name="beef">Biff</string>
+    <string name="meat">Kött</string>
+    <string name="pumpkinSeed">Pumpafrön</string>
+    <string name="veal">Kalv</string>
+
+    <string name="cashew">cashewnötter, cashewnöt</string>
+
+    <string name="panulirus">Panulirus</string>
+    <string name="mollusc">bjötdjur</string>
+    <string name="cellena">Cellena</string>
+    <string name="winkle">Winkle</string>
+    <string name="conchs">Conchs</string>
+    <string name="rockSnail">Rock Snail</string>
+    <string name="buccinidae">Valthornssnäckor</string>
+    <string name="chiton">Chiton</string>
+    <string name="mactridae">Mactridae</string>
+    <string name="pharidae">Knivmusslor</string>
+    <string name="donacidae">Donacidae</string>
+    <string name="trueLimpets">Patellogastropoda</string>
+    <string name="crustaceans">Kräftdjur</string>
+    <string name="oat">Havre</string>
+    <string name="onion">Lök</string>
+
+    <string name="searchAllergies">Sök Allergier</string>
+    <string name="translateFrom">översätt från</string>
+</resources>

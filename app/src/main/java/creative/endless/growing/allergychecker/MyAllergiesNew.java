@@ -1,5 +1,7 @@
 package creative.endless.growing.allergychecker;
 
+import android.app.Dialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,8 +14,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.SearchView;
 import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -27,6 +32,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 
 public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextListener {
@@ -37,6 +43,9 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
     private ViewGroup container;
     private final long DELAY = 500; // milliseconds
     private Timer timer = new Timer();
+    private FragmentActivity activity;
+    private HashMap<Integer, Integer> integerIntegerHashMap;
+    private HashMap<Integer, CheckBox> checkboxesHashmap = new HashMap<>();
 
 
     public MyAllergiesNew() {
@@ -67,7 +76,27 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
         View view = inflater.inflate(R.layout.fragment_allergies, container, false);
         parentFrame = view.findViewById(R.id.parent);
         this.container = container;
-
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.dialog_add_allergy);
+                dialog.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+        });
         return view;
     }
 
@@ -76,15 +105,18 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
         super.onViewCreated(view, savedInstanceState);
 
         new SetupAllergyView(parentFrame, new AllergyList(getContext()).getMyAllergies(), ValidateAllergiesPreferences.setupAllergy()).execute();
-
+        activity = getActivity();
         SearchView searchView = (SearchView) parentFrame.findViewById(R.id.searchBarAllergies);
+
         TreeMap<Integer, ArrayList<Integer>> keys = new AllergyList(getContext()).getMyAllergies();
         ArrayList<Integer> keysString = new ArrayList<>();
         for (ArrayList<Integer> key : keys.values()) {
             keysString.addAll(key);
 
         }
-        adapter = new ListViewAdapter(getContext(), keysString, ValidateAllergiesPreferences.setupAllergy());
+        integerIntegerHashMap = ValidateAllergiesPreferences.setupAllergy();
+
+        adapter = new ListViewAdapter(getContext(), keysString, integerIntegerHashMap, checkboxesHashmap);
         searchView = parentFrame.findViewById(R.id.searchBarAllergies);
         //change icon color
         listView = (ListView) parentFrame.findViewById(R.id.listViewAllergies);
@@ -120,7 +152,7 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
                 new TimerTask() {
                     @Override
                     public void run() {
-                        getActivity().runOnUiThread(new Runnable() {
+                        activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 int filter;
@@ -203,9 +235,10 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
                             ((TextView) parent.findViewById(R.id.name)).setText(convertToCorrectAllergyString(integer));
                             final ImageView chevron = parent.findViewById(R.id.chevron);
                             parentCB = parent.findViewById(R.id.checkBox);
-                            parentCB.setChecked(PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean(getString(integer), false));
-
+                            parentCB.setChecked(PreferenceManager.getDefaultSharedPreferences(getContext())
+                                    .getBoolean(String.valueOf(integerIntegerHashMap.get(integer)), false));
                             parentCB.setOnCheckedChangeListener(parentCheckboxListener());
+                            checkboxesHashmap.put(integerIntegerHashMap.get(integer), parentCB);
 
                             chevron.setOnClickListener(insertChildrenAllergies(inflate, chevron));
                             parent.setOnClickListener(insertChildrenAllergies(inflate, chevron));
@@ -223,15 +256,16 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
                                 for (CheckBox checkbox : childCheckbox) {
                                     checkbox.setChecked(b);
                                 }
-                                if(childCheckbox.isEmpty()){
+                                if (childCheckbox.isEmpty()) {
                                     for (final Integer allergy : myAllergyPreference.get(integer)) {
-                                        PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean(getString(allergy), b).apply();
-
+                                        PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                                .putBoolean(String.valueOf(integerIntegerHashMap.get(allergy)), b).apply();
                                     }
 
                                 }
-                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean(getString(integer), b).apply();
 
+                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit()
+                                        .putBoolean(String.valueOf(integerIntegerHashMap.get(integer)), b).apply();
                             }
                         };
                     }
@@ -258,14 +292,15 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
                                         views.add(child);
                                         final CheckBox cb = child.findViewById(R.id.checkBox);
                                         childCheckbox.add(cb);
-                                        cb.setChecked(PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean(getString(allergy), false));
-
+                                        cb.setChecked(PreferenceManager.getDefaultSharedPreferences(getContext())
+                                                .getBoolean(String.valueOf(integerIntegerHashMap.get(allergy)), false));
                                         child.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
                                                 cb.setChecked(!cb.isChecked());
                                             }
                                         });
+                                        checkboxesHashmap.put(integerIntegerHashMap.get(allergy), cb);
                                         ((CheckBox) child.findViewById(R.id.checkBox)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
                                             @Override
@@ -288,7 +323,7 @@ public class MyAllergiesNew extends Fragment implements SearchView.OnQueryTextLi
                                                     parentCB.setChecked(false);
                                                     parentCB.setOnCheckedChangeListener(parentCheckboxListener());
                                                 }
-                                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean(getString(allergy), b).apply();
+                                                PreferenceManager.getDefaultSharedPreferences(getContext()).edit().putBoolean(String.valueOf(integerIntegerHashMap.get(allergy)), b).apply();
 
                                             }
                                         });

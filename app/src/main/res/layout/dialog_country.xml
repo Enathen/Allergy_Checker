@@ -1,0 +1,59 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/primaryDark"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/en"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?selectableItemBackground"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"
+        android:minHeight="48dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+
+            android:background="@drawable/en" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginStart="8dp"
+
+            android:layout_height="wrap_content"
+            android:text="@string/english"
+            style="@style/txt" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?selectableItemBackground"
+
+        android:gravity="center"
+        android:minHeight="48dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+
+            android:background="@drawable/sv" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/swedish"
+            android:layout_marginStart="8dp"
+            style="@style/txt" />
+    </LinearLayout>
+
+</LinearLayout>

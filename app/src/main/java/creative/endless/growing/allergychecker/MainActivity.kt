@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.Random
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,18 +26,21 @@ class MainActivity : AppCompatActivity() {
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
+
             R.id.scan -> {
 
                 checkPermission()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.allergies -> {
+
                 replaceFragment(MyAllergiesNew.getInstance(), R.id.featureContainer)
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.settings -> {
+           /* R.id.settings -> {
+                replaceFragment(SettingsFragment.newInstance(),R.id.featureContainer)
                 return@OnNavigationItemSelectedListener true
-            }
+            }*/
         }
         false
     }
@@ -45,11 +50,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
         checkPermission()
+
+
+
 
     }
 
@@ -85,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(thisActivity, permissions, RC_HANDLE_CAMERA_PERM)
             return@OnClickListener
         }
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK)
             .setTitle(R.string.varning)
             .setMessage(R.string.thisAppOnlySave)
             .setPositiveButton(R.string.ok, listener)
@@ -139,7 +146,7 @@ class MainActivity : AppCompatActivity() {
 
         val listener = DialogInterface.OnClickListener { dialog, id -> finish() }
 
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this, AlertDialog.THEME_HOLO_DARK)
         builder.setTitle(R.string.cannotUseCamera)
             .setMessage(R.string.no_camera_permission)
             .setPositiveButton(R.string.ok, listener)

@@ -2582,6 +2582,12 @@
     </string>
 
     <string name="searchAllergies">SearchAllergies</string>
+    <string name="translateFrom">Translate From</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="allergy">Allergy</string>
+    <string name="addAllergy">Add Allergy</string>
+    <string name="swedish">Swedish</string>
 
 
 </resources>

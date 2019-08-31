@@ -2,6 +2,7 @@ package creative.endless.growing.allergychecker
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
@@ -11,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.SurfaceHolder
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -31,10 +33,28 @@ class ScannerFragment : Fragment() {
 
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val analyzeText = AnalyzeText(this)
+        var analyzeText = AnalyzeText(this, context?.let { Country.getLocale(it) })
         undo.setOnClickListener {
             allergies.removeAllViews()
             analyzeText.clear()
+        }
+        Country.setCorrectFlag(country, context!!)
+        country.setOnClickListener {
+            val dialog = Dialog(context!!)
+            dialog.setContentView(R.layout.dialog_country)
+            dialog.findViewById<LinearLayout>(R.id.sv).setOnClickListener {
+                dialog.dismiss()
+                androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).edit().putInt(Country.country, Country.sv).apply()
+                Country.setCorrectFlag(country, context!!)
+                analyzeText = AnalyzeText(this, context?.let { Country.getLocale(it) })
+            }
+            dialog.findViewById<LinearLayout>(R.id.en).setOnClickListener {
+                dialog.dismiss()
+                androidx.preference.PreferenceManager.getDefaultSharedPreferences(context).edit().putInt(Country.country, Country.en).apply()
+                Country.setCorrectFlag(country, context!!)
+                analyzeText = AnalyzeText(this, context?.let { Country.getLocale(it) })
+            }
+            dialog.show()
         }
         val textRecognizer = TextRecognizer.Builder(context).build()
 
@@ -109,19 +129,20 @@ class ScannerFragment : Fragment() {
     }
 
     fun insertData(
-            allFoundAllergies: HashMap<String, Int>,
-            allFoundENumbers: ArrayList<AllergyList.E_Numbers>
+        allFoundAllergies: HashMap<String, AllergiesClass>,
+        allFoundENumbers: ArrayList<AllergyList.E_Numbers>
     ) {
         if(allergies == null){
             return
         }
         allergies.removeAllViews()
-        for (allergy in allFoundAllergies.keys) {
+        allFoundAllergies["test"]?.amount
+        for (allergyClass in allFoundAllergies.values) {
             val inflate = layoutInflater.inflate(R.layout.allergy_list_view, container, false)
             val name = inflate.findViewById<TextView>(R.id.name)
             val amount = inflate.findViewById<TextView>(R.id.amount)
-            val amounts = allFoundAllergies.get(allergy)
-            name.text = allergy
+            val amounts = allergyClass.amount
+            name.text = allergyClass.motherAllergy
             amount.text = amounts.toString()
             allergies.addView(inflate)
         }

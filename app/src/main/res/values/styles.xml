@@ -1,14 +1,16 @@
 <resources>
 
-    <!-- Base application theme. --><style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Base application theme. --><style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/primary</item>
     <item name="colorPrimaryDark">@color/primaryDark</item>
-    <item name="colorAccent">@color/primaryLight</item>
+    <item name="colorAccent">@color/primaryDark</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="android:textColorSecondary">@color/whiteTransparent</item>
+    <item name="android:buttonTint">@color/primaryDark</item>
+    <item name="android:fontFamily">@font/bold</item>
 </style>
-
     <style name="txt">
-        <item name="android:fontFamily">@font/bold</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
@@ -18,7 +20,6 @@
     </style>
 
     <style name="cb">
-        <item name="android:fontFamily">@font/bold</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">12sp</item>
         <item name="android:maxLength">22</item>

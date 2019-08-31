@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -18,26 +19,6 @@
         app:layout_constraintBottom_toBottomOf="@id/preview"
         app:layout_constraintTop_toTopOf="@id/preview"/>
 
-    <ImageView
-        android:id="@+id/undo"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/circle"
-        android:foreground="@drawable/undo"
-        android:foregroundTint="@color/primary"
-        app:layout_constraintBottom_toBottomOf="@+id/preview"
-        app:layout_constraintBottom_toTopOf="@+id/allergiesText"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/allergiesText"
-        style="@style/txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/allergies"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@id/bottomSheet" />
 
     <ScrollView
         android:id="@+id/bottomSheet"
@@ -55,4 +36,57 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/allergyCL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/bottomSheet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/en"
+            app:layout_constraintBottom_toBottomOf="@+id/allergyCL"
+            app:layout_constraintStart_toStartOf="@+id/allergyCL"
+            app:layout_constraintTop_toTopOf="@+id/allergyCL"
+            />
+
+        <TextView
+            android:id="@+id/allergiesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="@string/allergies"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/allergyCL"
+            app:layout_constraintEnd_toStartOf="@+id/undo"
+            app:layout_constraintStart_toEndOf="@+id/country"
+            app:layout_constraintTop_toTopOf="@+id/allergyCL"
+            style="@style/txt.blue" />
+
+        <ImageView
+            android:id="@+id/undo"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/primaryDark"
+            android:foreground="@drawable/undo"
+            android:foregroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/allergyCL"
+            app:layout_constraintEnd_toEndOf="@+id/allergyCL"
+            app:layout_constraintTop_toTopOf="@+id/allergyCL"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
